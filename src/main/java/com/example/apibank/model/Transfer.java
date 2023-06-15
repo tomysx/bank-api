@@ -16,5 +16,46 @@ public class Transfer {
     private Long toWalletId;
     private BigDecimal amount;
 
-    // Getters y setters
+    public Transfer() {
+
+    }
+
+    public Transfer(Long id, Long fromWalletId, Long toWalletId, BigDecimal amount) {
+        this.id = id;
+        this.fromWalletId = fromWalletId;
+        this.toWalletId = toWalletId;
+        this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getFromWalletId() {
+        return fromWalletId;
+    }
+
+    public void setFromWalletId(Long fromWalletId) {
+        this.fromWalletId = fromWalletId;
+    }
+
+    public Long getToWalletId() {
+        return toWalletId;
+    }
+
+    public void setToWalletId(Long toWalletId) {
+        this.toWalletId = toWalletId;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
 }

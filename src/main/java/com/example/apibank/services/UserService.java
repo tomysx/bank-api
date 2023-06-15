@@ -2,6 +2,7 @@ package com.example.apibank.services;
 
 import com.example.apibank.model.User;
 import com.example.apibank.repositories.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,12 @@ public class UserService {
     }
 
     public User registerUser(User user) {
-        // Check if the user already exists
         return userRepository.save(user);
     }
 
     public User getUserById(Long id) {
-        // Actions done if the user is not located
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
     }
 }
 
