@@ -1,7 +1,7 @@
 package com.example.apibank.services;
 
 import com.example.apibank.model.Transfer;
-import com.example.apibank.model.User;
+import com.example.apibank.model.AppUser;
 import com.example.apibank.model.Wallet;
 import com.example.apibank.repositories.TransferRepository;
 import com.example.apibank.repositories.WalletRepository;
@@ -20,7 +20,7 @@ public class WalletService {
         this.transferRepository = transferRepository;
     }
 
-    public Wallet createWallet(User user) {
+    public Wallet createWallet(AppUser user) {
         Wallet wallet = new Wallet();
         wallet.setUser(user);
         wallet.setBalance(BigDecimal.ZERO);
@@ -37,7 +37,7 @@ public class WalletService {
 
     public void transferMoney(Wallet fromWallet, Wallet toWallet, BigDecimal amount) {
         if (fromWallet.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("Insufficient balance in the wallet");
+            throw new RuntimeException("No dispone de saldo suficiente para realizar la operación");
         }
         fromWallet.setBalance(fromWallet.getBalance().subtract(amount));
         toWallet.setBalance(toWallet.getBalance().add(amount));
@@ -56,11 +56,11 @@ public class WalletService {
     }
 
     public List<Transfer> getMovements(Wallet wallet) {
-        return transferRepository.findAllByFromWalletOrToWallet(wallet, wallet);
+        return transferRepository.findAllByFromWalletIdOrToWalletId(wallet.getId(), wallet.getId());
     }
 
     public Wallet getWalletById(Long id) {
         return walletRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Wallet not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("No se ha encontrado ninguna wallet con ID: " + id));
     }
 }

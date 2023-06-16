@@ -1,7 +1,7 @@
 package com.example.apibank.controllers;
 
 import com.example.apibank.model.Transfer;
-import com.example.apibank.model.User;
+import com.example.apibank.model.AppUser;
 import com.example.apibank.model.Wallet;
 import com.example.apibank.services.WalletService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class WalletController {
     }
 
     @PostMapping
-    public ResponseEntity<Wallet> createWallet(@RequestBody User user) {
+    public ResponseEntity<Wallet> createWallet(@RequestBody AppUser user) {
         Wallet wallet = walletService.createWallet(user);
         return new ResponseEntity<>(wallet, HttpStatus.CREATED);
     }
@@ -54,5 +54,10 @@ public class WalletController {
         Wallet wallet = walletService.getWalletById(id);
         List<Transfer> movements = walletService.getMovements(wallet);
         return new ResponseEntity<>(movements, HttpStatus.OK);
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

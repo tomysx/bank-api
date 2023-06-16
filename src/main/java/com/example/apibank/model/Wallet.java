@@ -18,13 +18,13 @@ public class Wallet {
     private BigDecimal balance;
 
     @ManyToOne
-    private User user;
+    private AppUser user;
 
     public Wallet() {
 
     }
 
-    public Wallet(Long id, BigDecimal balance, User user) {
+    public Wallet(Long id, BigDecimal balance, AppUser user) {
         this.id = id;
         this.balance = balance;
         this.user = user;
@@ -46,11 +46,11 @@ public class Wallet {
         this.balance = balance;
     }
 
-    public User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 }

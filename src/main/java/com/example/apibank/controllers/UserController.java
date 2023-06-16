@@ -1,7 +1,7 @@
 package com.example.apibank.controllers;
 
 // UserController.java
-import com.example.apibank.model.User;
+import com.example.apibank.model.AppUser;
 import com.example.apibank.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,13 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    public ResponseEntity<AppUser> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        User createdUser = userService.registerUser(user);
+    public ResponseEntity<AppUser> registerUser(@RequestBody AppUser user) {
+        AppUser createdUser = userService.registerUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 }
