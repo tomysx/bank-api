@@ -1,6 +1,7 @@
 package com.example.apibank.services;
 
 import com.example.apibank.model.Transfer;
+import com.example.apibank.model.Wallet;
 import com.example.apibank.repositories.TransferRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,11 @@ public class TransferService {
         if (optionalTransfer.isPresent()) {
             return optionalTransfer.get();
         } else {
-            throw new RuntimeException("Transfer not found for id :: " + id);
+            throw new RuntimeException("Transferencia no encontrada para ID: " + id);
         }
+    }
+
+    public List<Transfer> getTransfersByWallet(Wallet wallet) {
+        return transferRepository.findAllByWallet(wallet);
     }
 }

@@ -22,7 +22,7 @@ public class UserService {
 
     public AppUser getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con ID: " + id));
     }
 }
 

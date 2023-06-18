@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TransferRepository extends JpaRepository<Transfer, Long> {
-    List<Transfer> findAllByFromWalletIdOrToWalletId(Long fromWalletId, Long toWalletId);
+    List<Transfer> findAllByWallet(Wallet wallet);
 }

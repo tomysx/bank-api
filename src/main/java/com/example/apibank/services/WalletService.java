@@ -1,5 +1,6 @@
 package com.example.apibank.services;
 
+import com.example.apibank.exceptions.InsufficientFundsException;
 import com.example.apibank.model.Transfer;
 import com.example.apibank.model.AppUser;
 import com.example.apibank.model.Wallet;
@@ -8,7 +9,10 @@ import com.example.apibank.repositories.WalletRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class WalletService {
 
@@ -34,10 +38,11 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
-
-    public void transferMoney(Wallet fromWallet, Wallet toWallet, BigDecimal amount) {
+    public void transferMoney(Long fromWalletId, Long toWalletId, BigDecimal amount) {
+        Wallet fromWallet = getWalletById(fromWalletId);
+        Wallet toWallet = getWalletById(toWalletId);
         if (fromWallet.getBalance().compareTo(amount) < 0) {
-            throw new RuntimeException("No dispone de saldo suficiente para realizar la operación");
+            throw new InsufficientFundsException("No dispone de saldo suficiente para realizar la operación");
         }
         fromWallet.setBalance(fromWallet.getBalance().subtract(amount));
         toWallet.setBalance(toWallet.getBalance().add(amount));
@@ -45,8 +50,8 @@ public class WalletService {
         walletRepository.save(toWallet);
 
         Transfer transfer = new Transfer();
-        transfer.setFromWalletId(fromWallet.getId());
-        transfer.setToWalletId(toWallet.getId());
+        transfer.setFromWallet(fromWallet);
+        transfer.setToWallet(toWallet);
         transfer.setAmount(amount);
         transferRepository.save(transfer);
     }
@@ -56,7 +61,14 @@ public class WalletService {
     }
 
     public List<Transfer> getMovements(Wallet wallet) {
-        return transferRepository.findAllByFromWalletIdOrToWalletId(wallet.getId(), wallet.getId());
+        Set<Transfer> outgoingTransfers = wallet.getOutgoingTransfers();
+        Set<Transfer> incomingTransfers = wallet.getIncomingTransfers();
+
+        List<Transfer> allTransfers = new ArrayList<>();
+        allTransfers.addAll(outgoingTransfers);
+        allTransfers.addAll(incomingTransfers);
+
+        return allTransfers;
     }
 
     public Wallet getWalletById(Long id) {

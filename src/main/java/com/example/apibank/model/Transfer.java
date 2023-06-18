@@ -1,29 +1,41 @@
 package com.example.apibank.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Transfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long fromWalletId;
-    private Long toWalletId;
+
+    @ManyToOne
+    @JoinColumn(name = "wallet_id")
+    private Wallet wallet;
+
+    @ManyToOne
+    @JoinColumn(name = "from_wallet_id")
+    private Wallet fromWallet;
+
+    @ManyToOne
+    @JoinColumn(name = "to_wallet_id")
+    private Wallet toWallet;
+
     private BigDecimal amount;
 
     public Transfer() {
 
     }
 
-    public Transfer(Long id, Long fromWalletId, Long toWalletId, BigDecimal amount) {
+    public Transfer(Long id, Wallet fromWallet, Wallet toWallet, BigDecimal amount) {
         this.id = id;
-        this.fromWalletId = fromWalletId;
-        this.toWalletId = toWalletId;
+        this.fromWallet = fromWallet;
+        this.toWallet = toWallet;
         this.amount = amount;
     }
 
@@ -35,20 +47,20 @@ public class Transfer {
         this.id = id;
     }
 
-    public Long getFromWalletId() {
-        return fromWalletId;
+    public Wallet getFromWallet() {
+        return fromWallet;
     }
 
-    public void setFromWalletId(Long fromWalletId) {
-        this.fromWalletId = fromWalletId;
+    public void setFromWallet(Wallet fromWallet) {
+        this.fromWallet = fromWallet;
     }
 
-    public Long getToWalletId() {
-        return toWalletId;
+    public Wallet getToWallet() {
+        return toWallet;
     }
 
-    public void setToWalletId(Long toWalletId) {
-        this.toWalletId = toWalletId;
+    public void setToWallet(Wallet toWallet) {
+        this.toWallet = toWallet;
     }
 
     public BigDecimal getAmount() {
