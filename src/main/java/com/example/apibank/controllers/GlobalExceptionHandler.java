@@ -21,8 +21,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     //Por alguna razón al tratar de realizar un manejo personalizado de errores no he conseguido que se mostrasen
     // entiendo que se debe a que hay un controlador que viene con Spring que hace que la excepción tome otro camino
 
-    //Efectivamente he visto debugeando que se devía y no accede a esta clase. He tratado de establecer prioridad alta
-    // a este controlador pero ni con esas, lo dejo a modo de prueba de que lo he intentado
+    //Efectivamente he visto debugeando que se desvía y no accede a esta clase. He tratado de establecer prioridad alta
+    // a este controlador pero ni con esas, lo dejo a modo de prueba de que lo he intentado realizar
 
     @ExceptionHandler(InsufficientFundsException.class)
     public ResponseEntity<Object> handleInsufficientFundsException(InsufficientFundsException ex, WebRequest request) {

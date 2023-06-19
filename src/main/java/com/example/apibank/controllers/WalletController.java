@@ -40,7 +40,7 @@ public class WalletController {
             return ResponseEntity.badRequest().body("El email es obligatorio");
         }
 
-        // Intentamos crear la billetera
+        // Intentamos crear la wallet
         try {
             Wallet wallet = walletService.createWallet(user);
             return new ResponseEntity<>(wallet, HttpStatus.CREATED);

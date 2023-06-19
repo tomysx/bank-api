@@ -11,7 +11,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI usersMicroserviceOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("API Bank iobuilders")
+                .info(new Info().title("API Bank")
                         .description("Lo que no conviene a la colmena, no conviene a la abeja")
                         .version("1.0"));
     }
