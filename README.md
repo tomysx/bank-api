@@ -11,6 +11,7 @@ Esta API Rest simula un pequeño banco permitiendo el registro de usuarios, crea
 - Transferencia de dinero entre billeteras.
 - Integración opcional con Blockchain utilizando contratos inteligentes.
 - Pruebas unitarias y manejo de errores.
+- Documentación de la API con Swagger UI
 
 ## Tecnologías Utilizadas
 
