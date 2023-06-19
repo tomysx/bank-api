@@ -30,7 +30,7 @@ Esta API Rest simula un pequeño banco permitiendo el registro de usuarios, crea
 
 ## Configuración y Ejecución
 
-1. Clonar el repositorio: `git clone https://github.com/tomysx/api-bank.git`.
+1. Clonar el repositorio: `git clone https://github.com/tomysx/bank-api.git`.
 2. Asegurarse de estar en el directorio raíz del proyecto
 3. Ejecutar el proyecto con Gradle: `./gradlew bootRun` (Linux/Mac) o `gradlew.bat bootRun` (Windows).
 4. Acceder a la aplicación a través de un navegador web o herramienta de API (como Postman) en `http://localhost:8080`.
