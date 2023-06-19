@@ -36,6 +36,10 @@ Esta API Rest simula un pequeño banco permitiendo el registro de usuarios, crea
 3. Ejecutar el proyecto con Gradle: `./gradlew bootRun` (Linux/Mac) o `gradlew.bat bootRun` (Windows).
 4. Acceder a la aplicación a través de un navegador web o herramienta de API (como Postman) en `http://localhost:8080`.
 
+## Documentación de la API (Swagger)
+
+http://localhost:8080/swagger-ui/index.html#/
+
 ## Endpoints de la API
 
 #### Crear usuario
